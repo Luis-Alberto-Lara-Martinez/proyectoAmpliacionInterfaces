@@ -1,0 +1,84 @@
+{
+    "pedidos": [
+        {
+            "id": 1,
+            "idUsuario": 2,
+            "fecha": "2025-11-20",
+            "productos": [
+                {
+                    "idProducto": 1,
+                    "cantidad": 1,
+                    "precio": 899.99
+                }
+            ],
+            "total": 899.99,
+            "estado": "entregado"
+        },
+        {
+            "id": 2,
+            "idUsuario": 4,
+            "fecha": "2025-11-22",
+            "productos": [
+                {
+                    "idProducto": 3,
+                    "cantidad": 1,
+                    "precio": 129.99
+                },
+                {
+                    "idProducto": 4,
+                    "cantidad": 1,
+                    "precio": 69.99
+                }
+            ],
+            "total": 199.98,
+            "estado": "enviado"
+        },
+        {
+            "id": 3,
+            "idUsuario": 6,
+            "fecha": "2025-11-23",
+            "productos": [
+                {
+                    "idProducto": 2,
+                    "cantidad": 1,
+                    "precio": 299.99
+                }
+            ],
+            "total": 299.99,
+            "estado": "enviado"
+        },
+        {
+            "id": 4,
+            "idUsuario": 9,
+            "fecha": "2025-11-24",
+            "productos": [
+                {
+                    "idProducto": 5,
+                    "cantidad": 1,
+                    "precio": 649.99
+                },
+                {
+                    "idProducto": 7,
+                    "cantidad": 1,
+                    "precio": 139.99
+                }
+            ],
+            "total": 789.98,
+            "estado": "pendiente"
+        },
+        {
+            "id": 5,
+            "idUsuario": 2,
+            "fecha": "2025-11-25",
+            "productos": [
+                {
+                    "idProducto": 8,
+                    "cantidad": 1,
+                    "precio": 179.99
+                }
+            ],
+            "total": 179.99,
+            "estado": "pendiente"
+        }
+    ]
+}
