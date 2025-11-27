@@ -1,0 +1,39 @@
+<div class="container bg-secondary d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card shadow-lg p-4 rounded-3 login-card animate__animated animate__fadeInDown">
+        <h2 class="text-center mb-4">Iniciar sesión</h2>
+        <form (ngSubmit)="onSubmit()" [formGroup]="loginForm" novalidate>
+
+            <!-- Email -->
+            <div class="mb-3">
+                <label for="email" class="form-label">Correo electrónico</label>
+                <input type="email" id="email" class="form-control" formControlName="email" aria-describedby="emailHelp"
+                    required>
+                <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+                    class="text-danger mt-1">
+                    Ingresa un correo válido.
+                </div>
+            </div>
+
+            <!-- Password -->
+            <div class="mb-3">
+                <label for="password" class="form-label">Contraseña</label>
+                <input type="password" id="password" class="form-control" formControlName="password" required
+                    aria-required="true">
+                <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+                    class="text-danger mt-1">
+                    Ingresa tu contraseña.
+                </div>
+            </div>
+
+            <!-- Submit -->
+            <button type="submit" class="btn btn-primary w-100 mt-3 animate__animated animate__pulse"
+                [disabled]="loginForm.invalid">
+                Iniciar sesión
+            </button>
+        </form>
+
+        <p class="text-center mt-3">
+            <a href="#" class="link-primary">¿Olvidaste tu contraseña?</a>
+        </p>
+    </div>
+</div>
