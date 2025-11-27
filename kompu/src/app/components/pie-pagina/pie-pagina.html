@@ -27,24 +27,20 @@
                 <p><a href="#">Código ético</a></p>
             </div>
 
-            <div class="col-6 col-md-3">
-                <h5>SÍGUENOS</h5>
-                <button></button>
-                <div class="d-flex justify-content-md-end justify-content-start align-items-center">
-                    <div class="me-3 d-none d-md-block text-end">
-                        <p class="small mb-2">Síguenos</p>
-                    </div>
-                    <div class="d-flex gap-2">
-                        <a class="social-btn instagram" href="#" aria-label="Instagram"><i class="fab fa-instagram"
-                                aria-hidden="true"></i></a>
-                        <a class="social-btn facebook" href="#" aria-label="Facebook"><i class="fab fa-facebook-f"
-                                aria-hidden="true"></i></a>
-                        <a class="social-btn youtube" href="#" aria-label="YouTube"><i class="fab fa-youtube"
-                                aria-hidden="true"></i></a>
-                        <a class="social-btn x" href="#" aria-label="X"><i class="fab fa-x-twitter"
-                                aria-hidden="true"></i></a>
-                    </div>
-                </div>
+            <div class="col-6 col-md-3 d-flex flex-column">
+                <h5 class="mb-3">SÍGUENOS</h5>
+                <a class="mb-3" href="#" aria-label="Instagram">
+                    <i class="fa-brands fa-instagram fa-2xl" aria-hidden="true"></i>
+                </a>
+                <a class="mb-3" href="#" aria-label="Facebook">
+                    <i class="fa-brands fa-facebook fa-2xl" aria-hidden="true"></i>
+                </a>
+                <a class="mb-3" href="#" aria-label="X (Antiguo Twitter)">
+                    <i class="fa-brands fa-x-twitter fa-2xl" aria-hidden="true"></i>
+                </a>
+                <a href="#" aria-label="Youtube">
+                    <i class="fa-brands fa-youtube fa-2xl" aria-hidden="true"></i>
+                </a>
             </div>
         </div>
         <hr />
@@ -56,7 +52,16 @@
         </div>
         <hr />
         <div class="row text-center">
-            <p class="col-12">© Toda la web contiene copyright {{ year }}</p>
+            <p>© Toda la web contiene copyright {{ year }}</p>
+            <button type="button" class="btn btn-outline-light">
+                <i class="fa-brands fa-apple fa-2xl"></i>
+                <span>Descarga en la App Store</span>
+            </button>
+            <button type="button" class="btn btn-outline-light">
+                <i class="fa-brands fa-google-play fa-2xl"></i>
+                <span>Descarga en la App Store</span>
+            </button>
+
             <div class="col-12 d-flex justify-content-center gap-3">
                 <a class="app-badge" href="#" aria-label="App Store">
                     <i class="fa-brands fa-apple"></i>
