@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-pie-pagina',
@@ -7,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class PiePagina {
   year: number = new Date().getFullYear();
+
+  onAppleHover(imagenApple: HTMLImageElement): void {
+    imagenApple.src = 'assets/images/apple-store-negro.png';
+  }
+
+  onAppleLeave(imagenApple: HTMLImageElement): void {
+    imagenApple.src = 'assets/images/apple-store-blanco.png';
+  }
 }

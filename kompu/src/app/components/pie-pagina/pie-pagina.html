@@ -29,48 +29,44 @@
 
             <div class="col-6 col-md-3 d-flex flex-column">
                 <h5 class="mb-3">SÍGUENOS</h5>
-                <a class="mb-3" href="#" aria-label="Instagram">
-                    <i class="fa-brands fa-instagram fa-2xl" aria-hidden="true"></i>
-                </a>
-                <a class="mb-3" href="#" aria-label="Facebook">
-                    <i class="fa-brands fa-facebook fa-2xl" aria-hidden="true"></i>
-                </a>
-                <a class="mb-3" href="#" aria-label="X (Antiguo Twitter)">
-                    <i class="fa-brands fa-x-twitter fa-2xl" aria-hidden="true"></i>
-                </a>
-                <a href="#" aria-label="Youtube">
-                    <i class="fa-brands fa-youtube fa-2xl" aria-hidden="true"></i>
-                </a>
+                <div class="d-flex justify-content-between">
+                    <a class="mb-2" href="#" aria-label="Instagram">
+                        <img src="assets/images/instagram.png" width="40" height="40" alt="Logo de Instagram" />
+                    </a>
+                    <a class="mb-2" href="#" aria-label="Facebook">
+                        <img src="assets/images/facebook.png" width="40" height="40" alt="Logo de Facebook" />
+                    </a>
+                    <a class="mb-2" href="#" aria-label="X (Antiguo Twitter)">
+                        <img src="assets/images/x.png" width="40" height="40" alt="Logo de X (Antiguo Twitter)" />
+                    </a>
+                    <a href="#" aria-label="Youtube">
+                        <img src="assets/images/youtube.png" width="40" height="40" alt="Logo de Youtube" />
+                    </a>
+                </div>
             </div>
         </div>
         <hr />
         <div class="row text-center mt-4">
             <div class="col-12">
-                <p class="mb-4">Pagos 100% seguros con</p>
-                <p> <i class="fa-brands fa-paypal fa-2xl"></i></p>
+                <p>Pagos 100% seguros con</p>
+                <img src="assets/images/paypal.png" width="40" height="40" alt="Logo de Paypal">
             </div>
         </div>
         <hr />
         <div class="row text-center">
             <p>© Toda la web contiene copyright {{ year }}</p>
-            <button type="button" class="btn btn-outline-light">
-                <i class="fa-brands fa-apple fa-2xl"></i>
-                <span>Descarga en la App Store</span>
-            </button>
-            <button type="button" class="btn btn-outline-light">
-                <i class="fa-brands fa-google-play fa-2xl"></i>
-                <span>Descarga en la App Store</span>
-            </button>
-
-            <div class="col-12 d-flex justify-content-center gap-3">
-                <a class="app-badge" href="#" aria-label="App Store">
-                    <i class="fa-brands fa-apple"></i>
-                    <span class="ms-2">Download on the App Store</span>
-                </a>
-                <a class="app-badge" href="#" aria-label="Google Play">
-                    <i class="fa-brands fa-google-play"></i>
-                    <span class="ms-2 d-none d-sm-inline">Get it on Google Play</span>
-                </a>
+            <div class="d-flex justify-content-center">
+                <button type="button" class="btn btn-outline-light w-auto d-flex align-items-center me-3"
+                    (mouseenter)="onAppleHover(imagenAppleStore)" (mouseleave)="onAppleLeave(imagenAppleStore)">
+                    <img #imagenAppleStore class="me-2" src="assets/images/apple-store-blanco.png" width="30"
+                        height="30" alt="Logo de Apple Store" />
+                    <span>Descarga en la App Store</span>
+                </button>
+                <button type="button" class="btn btn-outline-light w-auto d-flex align-items-center">
+                    <img class="me-2" src="assets/images/google-play.png" width="30" height="30"
+                        alt="Logo de Google Play" />
+                    <span>Consíguelo en Google Play</span>
+                </button>
             </div>
         </div>
     </div>

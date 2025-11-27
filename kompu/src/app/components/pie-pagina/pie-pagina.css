@@ -1,8 +1,10 @@
-a{
+a {
     color: inherit;
     text-decoration: none;
+    width: fit-content;
+    height: fit-content;
 }
 
-a:hover{
+a:hover {
     text-decoration: underline;
 }
