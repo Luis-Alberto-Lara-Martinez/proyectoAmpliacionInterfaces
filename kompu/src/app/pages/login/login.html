@@ -1,31 +1,34 @@
-<div class="d-flex vh-100">
-    <div class="flex-fill text-white d-flex flex-column justify-content-center px-5"
-        style="background: linear-gradient(135deg, #ff6a00, #ee0979);">
-        <h1 class="display-5 fw-bold">Bienvenido a Kompu</h1>
-        <p class="fs-5 mt-3">Tu tienda de informática de confianza. Encuentra lo último en tecnología y accesorios.</p>
+<div class="row vh-100 g-0">
+    <video autoplay muted loop class="position-absolute w-100 h-100">
+        <source src="assets/videos/fondo-login-registro.mp4" type="video/mp4">
+    </video>
+
+    <div id="bienvenido"
+        class="d-none col-lg-7 text-white d-lg-flex flex-column justify-content-center align-items-center p-5">
+        <img src="assets/images/icons/kompu.png" alt="logo de Kompu" class="w-25 mb-4" />
+        <h1 class="fw-bold">Bienvenido a Kompu</h1>
+        <p class="fs-4 mt-3">Tu tienda de informática de confianza. Encuentra lo último en tecnología y accesorios.</p>
     </div>
 
-    <div class="flex-fill d-flex align-items-center justify-content-center bg-white">
-        <form (ngSubmit)="onLogin()" class="w-100" style="max-width: 400px;">
-            <h2 class="text-primary mb-4">INICIO DE SESIÓN</h2>
+    <div id="divFormulario" class="col-12 col-lg-5 d-flex justify-content-center align-items-center">
+        <form id="formulario" (ngSubmit)="onLogin()" class="bg-white p-5 rounded shadow">
+            <h2 class=" text-primary mb-4">INICIO DE SESIÓN</h2>
 
-            <div class="input-group mb-3 border-bottom">
-                <span class="input-group-text bg-white border-0 text-primary"><i class="fa fa-user"></i></span>
-                <input type="text" class="form-control border-0" placeholder="Usuario" [(ngModel)]="email"
-                    name="username" required />
+            <div class="input-group mb-4 border-bottom">
+                <span class="input-group-text bg-white border-0 text-primary"><i class="fa-solid fa-user"></i></span>
+                <input type="text" class="form-control border-0" placeholder="Email" [(ngModel)]="email" name="username"
+                    required />
             </div>
 
-            <div class="input-group mb-3 border-bottom">
+            <div class="input-group mb-4 border-bottom">
                 <span class="input-group-text bg-white border-0 text-primary"><i class="fa fa-lock"></i></span>
                 <input type="password" class="form-control border-0" placeholder="Contraseña" [(ngModel)]="clave"
                     name="password" required />
             </div>
 
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <a href="#" class="text-primary text-decoration-none">¿Olvidaste tu contraseña?</a>
-            </div>
+            <a href="#" class="text-primary text-decoration-none">¿Olvidaste tu contraseña?</a>
 
-            <button type="submit" class="btn btn-primary w-100 py-2">INGRESAR</button>
+            <button type="submit" class="btn btn-primary w-100 py-2 mt-4">INGRESAR</button>
         </form>
     </div>
 </div>

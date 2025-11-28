@@ -1,14 +1,17 @@
-.login-card {
-    width: 100%;
-    max-width: 400px;
-    background: #ffffff;
+video {
+    object-fit: cover;
+    z-index: -1;
 }
 
-input:focus {
-    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, .25);
+#bienvenido {
+    background: rgba(0, 0, 0, 0.6);
 }
 
-button:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
+#divFormulario {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+#formulario {
+    min-width: 400px;
+    width: 80%;
 }
