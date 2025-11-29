@@ -52,5 +52,16 @@ export class Menu {
     });
   }
 
-  cerrarSesion() { }
+  cerrarSesion() {
+    let token = localStorage.getItem("token");
+    if (token) {
+      localStorage.removeItem("token")
+    }
+
+    if (this.router.url === '/home') {
+      location.reload()
+    } else {
+      this.router.navigate(['/home']);
+    }
+  }
 }
