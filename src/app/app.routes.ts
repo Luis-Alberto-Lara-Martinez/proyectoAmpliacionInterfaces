@@ -9,7 +9,6 @@ export const routes: Routes = [
     {
         path: 'productos/:id',
         loadComponent: () => import('./pages/detalles-producto/detalles-producto').then(m => m.DetallesProducto),
-        data: { RenderMode: RenderMode.Server }
     },
     {
         path: 'login',
