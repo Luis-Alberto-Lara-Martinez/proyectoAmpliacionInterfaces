@@ -1,18 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Menu } from "../../components/menu/menu";
 import { PiePagina } from "../../components/pie-pagina/pie-pagina";
 import { ScrollToTop } from "../../components/scroll-to-top/scroll-to-top";
 import { CommonModule } from '@angular/common';
 import { UsuariosService } from '../../services/usuarios/usuarios-service';
-
-interface Usuario {
-    nombre: string;
-    correo: string;
-    clave: string;
-    telefono: string;
-    direccion: string;
-}
+import { Usuario } from '../../models/usuario';
 
 @Component({
     selector: 'app-datos-personales',
@@ -20,8 +13,14 @@ interface Usuario {
     templateUrl: './datos-personales.html',
     styleUrl: './datos-personales.css',
 })
-export class DatosPersonales implements OnInit {
+export class DatosPersonales {
     usuario: Usuario | null = null;
+    id: number = 0;
+    nombre: string = "";
+    email: string = "";
+    clave: string = "";
+    telefono: string = "";
+    direccion: string = "";
 
     constructor(private router: Router, private usuariosService: UsuariosService) { }
 
@@ -32,18 +31,20 @@ export class DatosPersonales implements OnInit {
     }
 
     obtenerDatosUsuario(): void {
-        try {
-            const usuarioGuardado = localStorage.getItem('usuarioActual');
+        const tokenString = localStorage.getItem("token");
+        if (!tokenString) return;
+        const payload = JSON.parse(atob(tokenString.split(".")[1]));
+        if (!payload) return;
+        const listaUsuariosString = localStorage.getItem("listaUsuarios");
+        if (!listaUsuariosString) return;
+        const listaUsuarios: Usuario[] = JSON.parse(listaUsuariosString);
+        const usuario = listaUsuarios.find(u => u.id == payload.id)
+        if (!usuario) return;
 
-            if (usuarioGuardado) {
-                this.usuario = JSON.parse(usuarioGuardado);
-                console.log('Datos del usuario:', this.usuario);
-            } else {
-                console.log('No hay usuario en sesión');
-            }
-        } catch (error) {
-            console.error('Error al obtener datos del usuario:', error);
-            this.usuario = null;
-        }
+        this.nombre = usuario.nombre;
+        this.email = usuario.email;
+        this.clave = usuario.clave;
+        this.telefono = usuario.telefono;
+        this.direccion = usuario.direccion;
     }
 }

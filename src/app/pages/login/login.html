@@ -11,6 +11,32 @@
     </div>
 
     <div id="divFormulario" class="col-12 col-lg-5 d-flex justify-content-center align-items-center">
+
+        @if (tokenResetearClave) {
+        <form id="formulario-reset" (ngSubmit)="onChangePassword()" class="bg-white p-5 rounded shadow">
+            <h2 class="text-primary mb-4">REESTABLECER CONTRASEÑA</h2>
+
+            <div class="input-group mb-4 border-bottom">
+                <span class="input-group-text bg-white border-0 text-primary"><i class="fa fa-lock"></i></span>
+                <input type="password" class="form-control border-0" placeholder="Nueva Contraseña"
+                    [(ngModel)]="nuevaClave" name="newPassword" required />
+            </div>
+
+            @if (error!="") {
+            <div class="alert alert-danger" role="alert">{{error}}</div>
+            }
+
+            @if (cargando) {
+            <button class="btn btn-primary w-100 py-2 mt-4" type="button" disabled>
+                <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                CARGANDO ...
+            </button>
+            }@else {
+            <button type="submit" class="btn btn-primary w-100 py-2 mt-4">CAMBIAR CONTRASEÑA</button>
+            }
+        </form>
+
+        } @else {
         <form id="formulario" (ngSubmit)="onLogin()" class="bg-white p-5 rounded shadow">
             <h2 class=" text-primary mb-4">INICIO DE SESIÓN</h2>
 
@@ -34,12 +60,13 @@
                 ¿Olvidaste tu contraseña?
             </a>
 
-
-            @if (usuarioRecuperaClave=="Correo enviado exitosamente") {
-            <div class="alert alert-success mt-3" role="alert">{{usuarioRecuperaClave}}</div>
-            }
-            @if (usuarioRecuperaClave=="Error al enviar el correo") {
-            <div class="alert alert-danger mt-3" role="alert">{{usuarioRecuperaClave}}</div>
+            @if (usuarioRecuperaClave) {
+            <div class="alert mt-3" [ngClass]="{
+                    'alert-success': usuarioRecuperaClave === 'Correo enviado exitosamente',
+                    'alert-danger': usuarioRecuperaClave === 'Error al enviar el correo'
+                    }" role="alert">
+                {{ usuarioRecuperaClave }}
+            </div>
             }
 
             <div class="mt-3">
@@ -57,5 +84,6 @@
             <button type="submit" class="btn btn-primary w-100 py-2 mt-4">INGRESAR</button>
             }
         </form>
+        }
     </div>
 </div>

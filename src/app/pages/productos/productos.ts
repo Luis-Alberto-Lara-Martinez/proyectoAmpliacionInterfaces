@@ -18,12 +18,15 @@ export class Productos {
   productosFiltrados: Producto[] = [];
   categorias: string[] = [];
   marcas: string[] = [];
+  precioMaximoProductos: number = 0;
+  mostrarFiltros: boolean = false;
+  ordenSeleccionado: string = '';
 
   filtros = {
     categoria: '',
     marca: '',
     precioMin: 0,
-    precioMax: 1000
+    precioMax: 0
   };
 
   constructor(private router: Router, private productosService: ProductosService) { }
@@ -53,6 +56,11 @@ export class Productos {
   private inicializarFiltros(): void {
     this.categorias = [...new Set(this.productos.map(p => p.categoria))].sort();
     this.marcas = [...new Set(this.productos.map(p => p.marca))].sort();
+
+    // Calcular precio máximo de todos los productos
+    this.precioMaximoProductos = Math.ceil(Math.max(...this.productos.map(p => p.precio)));
+    this.filtros.precioMax = this.precioMaximoProductos;
+
     this.aplicarFiltros();
   }
 
@@ -63,6 +71,8 @@ export class Productos {
       const cumplePrecio = p.precio >= this.filtros.precioMin && p.precio <= this.filtros.precioMax;
       return cumpleCategoria && cumpleMarca && cumplePrecio;
     });
+
+    this.ordenarProductos();
   }
 
   seleccionarCategoria(categoria: string): void {
@@ -80,8 +90,55 @@ export class Productos {
       categoria: '',
       marca: '',
       precioMin: 0,
-      precioMax: 1000
+      precioMax: this.precioMaximoProductos
     };
     this.aplicarFiltros();
+  }
+
+  toggleFiltros(): void {
+    this.mostrarFiltros = !this.mostrarFiltros;
+  }
+
+  ordenarProductos(): void {
+    switch (this.ordenSeleccionado) {
+      case 'precio-desc':
+        this.productosFiltrados.sort((a, b) => b.precio - a.precio);
+        break;
+      case 'precio-asc':
+        this.productosFiltrados.sort((a, b) => a.precio - b.precio);
+        break;
+      case 'nombre-asc':
+        this.productosFiltrados.sort((a, b) => a.nombre.localeCompare(b.nombre));
+        break;
+      default:
+        // Sin ordenación específica
+        break;
+    }
+  }
+
+  añadirFavorito(producto: Producto) {
+    // Verificar si hay usuario autenticado
+    const usuarioActual = JSON.parse(localStorage.getItem('usuarioActual') || '{}');
+
+    if (!usuarioActual.id) {
+      alert('Debes iniciar sesión para añadir favoritos');
+      this.router.navigate(['/login']);
+      return;
+    }
+
+    // Obtener lista de favoritos del usuario
+    const favoritos = JSON.parse(localStorage.getItem(`favoritos_${usuarioActual.id}`) || '[]');
+
+    // Verificar si el producto ya está en favoritos
+    if (favoritos.some((p: Producto) => p.id === producto.id)) {
+      alert('Este producto ya está en tus favoritos');
+      return;
+    }
+
+    // Añadir el producto a favoritos
+    favoritos.push(producto);
+    localStorage.setItem(`favoritos_${usuarioActual.id}`, JSON.stringify(favoritos));
+
+    alert('Producto añadido a favoritos');
   }
 }

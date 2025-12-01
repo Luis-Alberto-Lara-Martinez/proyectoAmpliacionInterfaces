@@ -1,6 +1,24 @@
 <app-menu></app-menu>
 <app-scroll-to-top></app-scroll-to-top>
-    <div>
-        
+<div class="favoritos-container">
+  <h1>Mis Favoritos</h1>
+  
+  <!-- Lista de favoritos -->
+  <div *ngIf="(favoritos).length > 0" class="productos-grid">
+    <div *ngFor="let producto of favoritos" class="producto-card">
+      <img [src]="producto.listaImagenes[0]" [alt]="producto.nombre">
+      <h3>{{ producto.nombre }}</h3>
+      <p class="marca">{{ producto.marca }}</p>
+      <p class="precio">${{ producto.precio }}</p>
+      <button (click)="eliminarFavorito(producto.id)" class="btn-eliminar">
+        Eliminar de favoritos
+      </button>
     </div>
+  </div>
+
+  <!-- Mensaje si no hay favoritos -->
+  <div *ngIf="(favoritos).length === 0" class="sin-favoritos">
+    <p>No tienes productos en tu lista de deseos</p>
+  </div>
+</div>
 <app-pie-pagina></app-pie-pagina>

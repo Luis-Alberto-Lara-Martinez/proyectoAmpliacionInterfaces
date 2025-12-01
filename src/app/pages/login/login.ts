@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import emailjs from '@emailjs/browser';
 import { UsuariosService } from '../../services/usuarios/usuarios-service';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  imports: [FormsModule],
+  imports: [FormsModule, NgClass],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
@@ -15,13 +16,24 @@ export class Login {
   error: string = "";
   usuarioRecuperaClave: string = "";
 
+  // Nueva variable para el token de reseteo
+  tokenResetearClave: string | null = null;
+
   email: string = "";
   clave: string = "";
+  nuevaClave: string = ""; // Para el nuevo campo de clave
 
-  constructor(private servicio: UsuariosService, private router: Router) { }
-
+  constructor(
+    private servicio: UsuariosService,
+    private router: Router,
+    private route: ActivatedRoute // Inyectar ActivatedRoute
+  ) { }
   ngOnInit() {
     this.cargarUsuarios();
+
+    this.route.queryParams.subscribe(params => {
+      this.tokenResetearClave = params['tokenResetearClave'] || null;
+    });
   }
 
   cargarUsuarios() {
@@ -58,6 +70,12 @@ export class Login {
         }
       }
     });
+  }
+
+  onChangePassword() {
+    // Implementar la lógica para cambiar la clave usando this.nuevaClave y this.tokenResetearClave
+    console.log('Cambiando clave con token:', this.tokenResetearClave, 'y nueva clave:', this.nuevaClave);
+    // Aquí iría la llamada al servicio para cambiar la clave
   }
 
   recuperarClave() {
