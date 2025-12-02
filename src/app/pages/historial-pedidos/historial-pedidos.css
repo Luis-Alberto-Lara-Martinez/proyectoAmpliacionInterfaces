@@ -1,0 +1,61 @@
+/* Estilos personalizados que Bootstrap no puede replicar */
+
+/* Gradiente personalizado para el header del pedido */
+.pedido-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+}
+
+/* Efecto hover para las tarjetas de pedido */
+.hover-card {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.hover-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Efecto hover para los productos */
+.producto-hover {
+  transition: background-color 0.2s;
+}
+
+.producto-hover:hover {
+  background-color: #e9ecef !important;
+}
+
+/* Colores personalizados para los estados */
+.estado-entregado {
+  background-color: #28a745 !important;
+  color: white !important;
+}
+
+.estado-enviado {
+  background-color: #17a2b8 !important;
+  color: white !important;
+}
+
+.estado-pendiente {
+  background-color: #ffc107 !important;
+  color: #333 !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .card-body .ms-auto {
+    max-width: 100% !important;
+    margin-left: 0 !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .producto-hover {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .producto-hover img {
+    width: 100px !important;
+    height: 100px !important;
+  }
+}

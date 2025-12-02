@@ -64,6 +64,7 @@ export class Login {
     let usuario = listaUsuarios.find(u =>
       u.email.toLowerCase() == this.email.toLowerCase() &&
       u.clave == btoa(this.clave)
+      && u.estado == 'activado'
     );
     if (!usuario) {
       this.cargando = false;

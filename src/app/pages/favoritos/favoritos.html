@@ -1,32 +1,38 @@
 <app-menu></app-menu>
 <app-scroll-to-top></app-scroll-to-top>
-<div class="favoritos-container">
-  <h1>Mis Favoritos</h1>
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h4 fw-semibold mb-0">Mis Favoritos</h1>
+    <span class="text-muted">{{ favoritos.length }} productos</span>
+  </div>
 
-  <!-- Lista de favoritos -->
+  <!-- Vacío -->
+  <div *ngIf="favoritos.length === 0" class="alert alert-info" role="alert">
+    No tienes productos en tu lista de deseos.
+  </div>
 
-  <div class="row">
-    <div *ngFor="let producto of favoritos" class="col-12 col-sm-6 col-lg-4 col-xl-3 producto-card">
-      <article class="card h-100" tabindex="0">
-        <div class="bg-light border-bottom">
-          <img [src]="producto.listaImagenes[0]" class="img-fluid" style="object-fit: cover;" [alt]="producto.nombre">
-        </div>
-        <div class="card-body d-flex flex-column gap-2">
-          <h2 class="card-title h6 mb-1">{{ producto.nombre }}</h2>
-          <p class="card-text text-body-secondary mb-1 small">{{ producto.descripcion }}</p>
-          <div class="fw-semibold mb-2">{{ producto.precio }}€</div>
-          <div class="d-flex gap-2 mt-auto">
-            <button type="button" class="btn btn-primary btn-sm" (click)="eliminarFavorito(producto.id)">Eliminar</button>
+  <!-- Lista de favoritos en cajitas horizontales -->
+  <div class="d-flex flex-column gap-3">
+    <div *ngFor="let producto of favoritos" class="card shadow-sm" tabindex="0">
+      <div class="card-body d-flex flex-wrap align-items-start gap-3">
+        <!-- Imagen -->
+        <img [src]="producto.listaImagenes[0]" [alt]="producto.nombre" class="rounded border" style="width:80px;height:80px;object-fit:cover;">
+
+        <!-- Info y controles -->
+        <div class="flex-grow-1">
+          <div class="d-flex justify-content-between align-items-center">
+            <h2 class="h6 mb-0">{{ producto.nombre }}</h2>
+            <div class="fw-semibold">{{ producto.precio }}€</div>
+          </div>
+          <p class="text-body-secondary small mb-2">{{ producto.descripcion }}</p>
+
+          <div class="d-flex flex-wrap align-items-center gap-2">
+            <button type="button" class="btn btn-outline-danger btn-sm" (click)="eliminarFavorito(producto.id)">Eliminar</button>
           </div>
         </div>
-      </article>
+      </div>
     </div>
   </div>
 
-
-  <!-- Mensaje si no hay favoritos -->
-  <div *ngIf="(favoritos).length === 0" class="sin-favoritos">
-    <p>No tienes productos en tu lista de deseos</p>
-  </div>
 </div>
 <app-pie-pagina></app-pie-pagina>

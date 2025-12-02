@@ -38,24 +38,142 @@
             <div>
                 <h1 class="h4 mb-1">{{ producto.nombre }}</h1>
                 <div class="text-body-secondary small">
-                    <h3>Descripcion:</h3>
                     <span class="me-2">Marca: <strong>{{ producto.marca }}</strong></span>
-                    <p></p>
-                    <span>Categoria: <strong>{{ producto.categoria }}</strong></span>
+                    <span>| Categoría: <strong>{{ producto.categoria }}</strong></span>
                 </div>
             </div>
 
+            <!-- Valoración promedio -->
+            @if (producto.valoraciones && producto.valoraciones.length > 0) {
+            <div class="d-flex align-items-center gap-2">
+                <div class="text-warning fs-5">
+                    @for (estrella of generarEstrellas(calcularPromedioValoraciones()); track $index) {
+                    <span>{{ estrella }}</span>
+                    }
+                </div>
+                <span class="text-body-secondary small">
+                    {{ calcularPromedioValoraciones() }} ({{ producto.valoraciones.length }} {{ producto.valoraciones.length === 1 ? 'reseña' : 'reseñas' }})
+                </span>
+            </div>
+            }
+
             <div class="display-6 fw-semibold">{{ producto.precio }}€</div>
 
-            <p class="mb-0">{{ producto.descripcion }}</p>
+            <div>
+                <h3 class="h6 fw-semibold">Descripción:</h3>
+                <p class="mb-0">{{ producto.descripcion }}</p>
+            </div>
 
+            <!-- Botones de acción -->
+            <div class="d-flex flex-wrap gap-2">
+                <button type="button" class="btn btn-primary" (click)="anadirCarrito(producto)">Añadir al carrito</button>
+                <button type="button" class="btn btn-outline-secondary" (click)="anadirFavorito(producto)">♥️ Añadir a favoritos</button>
+            </div>
 
             <div class="mt-3">
                 <a routerLink="/productos" class="btn btn-link px-0">← Volver a productos</a>
             </div>
         </div>
     </div>
+
+    <!-- Sección de Reseñas -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="h4 mb-0">Reseñas de clientes</h2>
+                <button type="button" class="btn btn-primary btn-sm" (click)="toggleFormularioResena()">
+                    {{ mostrarFormularioResena ? 'Cancelar' : '✍️ Escribir reseña' }}
+                </button>
+            </div>
+
+            <!-- Formulario para añadir reseña -->
+            @if (mostrarFormularioResena) {
+            <div class="card mb-4 border-primary">
+                <div class="card-body">
+                    <h3 class="h6 fw-semibold mb-3">Escribe tu reseña</h3>
+                    <form (ngSubmit)="enviarResena()">
+                        <!-- Selector de estrellas -->
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Calificación</label>
+                            <div class="d-flex gap-2 align-items-center">
+                                @for (estrella of [1, 2, 3, 4, 5]; track estrella) {
+                                <button
+                                    type="button"
+                                    class="btn btn-link p-0 text-decoration-none"
+                                    (click)="nuevaResena.nota = estrella"
+                                    style="font-size: 2rem;">
+                                    <span [class.text-warning]="estrella <= nuevaResena.nota"
+                                          [class.text-secondary]="estrella > nuevaResena.nota">
+                                        {{ estrella <= nuevaResena.nota ? '★' : '☆' }}
+                                    </span>
+                                </button>
+                                }
+                                <span class="ms-2 text-body-secondary">{{ nuevaResena.nota }} de 5 estrellas</span>
+                            </div>
+                        </div>
+
+                        <!-- Campo de comentario -->
+                        <div class="mb-3">
+                            <label for="comentarioResena" class="form-label fw-semibold">Comentario (opcional)</label>
+                            <textarea
+                                class="form-control"
+                                id="comentarioResena"
+                                rows="4"
+                                [(ngModel)]="nuevaResena.comentario"
+                                name="comentario"
+                                placeholder="Comparte tu experiencia con este producto..."
+                                maxlength="500"></textarea>
+                            <div class="form-text">{{ nuevaResena.comentario.length }}/500 caracteres</div>
+                        </div>
+
+                        <!-- Botones -->
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-primary">Publicar reseña</button>
+                            <button type="button" class="btn btn-secondary" (click)="cancelarResena()">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            }
+
+            <!-- Lista de reseñas existentes -->
+            @if (producto.valoraciones && producto.valoraciones.length > 0) {
+            <div class="d-flex flex-column gap-3">
+                @for (valoracion of producto.valoraciones; track $index) {
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div>
+                                <h3 class="h6 fw-semibold mb-1">{{ obtenerNombreUsuario(valoracion.idUsuario) }}</h3>
+                                <div class="text-warning">
+                                    @for (estrella of generarEstrellas(valoracion.nota); track $index) {
+                                    <span>{{ estrella }}</span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        @if (valoracion.comentario) {
+                        <p class="mb-0 text-body-secondary">{{ valoracion.comentario }}</p>
+                        }
+                    </div>
+                </div>
+                }
+            </div>
+            } @else {
+            <div class="alert alert-info" role="alert">
+                Este producto aún no tiene reseñas. ¡Sé el primero en valorarlo!
+            </div>
+            }
+        </div>
+    </div>
     }
 </main>
-<!-- Valoraciones -->
+
+<!-- Mensaje emergente -->
+@if (mensajeEmergente) {
+<div class="mensaje-emergente">
+  {{ mensajeEmergente }}
+</div>
+}
+
 <app-pie-pagina></app-pie-pagina>
