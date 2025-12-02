@@ -17,7 +17,8 @@
           <p class="card-text text-body-secondary mb-1 small">{{ producto.descripcion }}</p>
           <div class="fw-semibold mb-2">{{ producto.precio }}€</div>
           <div class="d-flex gap-2 mt-auto">
-            <button type="button" class="btn btn-primary btn-sm">Eliminar</button>
+            <button type="button" class="btn btn-primary btn-sm" (click)="eliminarDelCarrito(producto.id)">Eliminar</button>
+            <input type="number" class="form-control form-control-sm w-25" min="1" [value]="producto.cantidad || 1" (input)="actualizarCantidad(producto, $event)">
           </div>
         </div>
       </article>
@@ -28,7 +29,9 @@
   <!-- <div *ngIf="(carro).length === 0" class="carro-empty">
     <p>No tienes productos en tu carrito</p>
   </div> -->
+  <p class="form-control-static">SUBPRECIO: {{(precioTotal*0.79).toFixed(2)}}</p>
+  <p class="form-control-static">PRECIO CON IVA: {{precioTotal}}</p>
 </div>
-<p>TOTAL</p>
-<app-paypal-button></app-paypal-button>
+<!-- <p>TOTAL</p> -->
+<app-paypal-button [totalCompra]="precioTotal"></app-paypal-button>
 <app-pie-pagina></app-pie-pagina>

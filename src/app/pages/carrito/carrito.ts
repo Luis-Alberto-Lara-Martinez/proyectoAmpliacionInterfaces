@@ -15,7 +15,8 @@ import { PaypalButton } from "../../components/paypal-button/paypal-button";
   styleUrl: './carrito.css',
 })
 export class Carrito implements OnInit {
-  carrito: Producto[] = [];
+  carrito: any[] = [];
+  precioTotal: number = 0;
 
   constructor(private router: Router) { }
 
@@ -36,13 +37,81 @@ export class Carrito implements OnInit {
     usuario.carrito.forEach(productoEnCarrito => {
       const producto = listaProductos.find(p => p.id == productoEnCarrito.idProducto)
       if (!producto) return;
+      producto.stock = productoEnCarrito.cantidad;
       this.carrito.push(producto);
     })
+    this.calcularTotal();
   }
 
+  
   eliminarDelCarrito(idProducto: number): void {
-    const usuarioActual = JSON.parse(localStorage.getItem('usuarioActual') || '{}');
-    // this.favoritos = this.favoritos.filter(p => p.id !== idProducto);
-    // localStorage.setItem(`favoritos_${usuarioActual.id}`, JSON.stringify(this.favoritos));
+    if (typeof window === 'undefined') return;
+    const tokenString = localStorage.getItem("token");
+    if (!tokenString) return;
+    const payload = JSON.parse(atob(tokenString.split(".")[1]));
+    if (!payload) return;
+    const listaUsuariosString = localStorage.getItem("listaUsuarios");
+    if (!listaUsuariosString) return;
+    const listaUsuarios: Usuario[] = JSON.parse(listaUsuariosString);
+    const usuarioIndex = listaUsuarios.findIndex(u => u.id == payload.id)
+    if (usuarioIndex === -1) return;
+    const productoIndex = listaUsuarios[usuarioIndex].carrito.findIndex(p => p.idProducto == idProducto);
+    if (productoIndex === -1) return;
+    listaUsuarios[usuarioIndex].carrito.splice(productoIndex, 1);
+    localStorage.setItem("listaUsuarios", JSON.stringify(listaUsuarios));
+    this.carrito = this.carrito.filter(p => p.id !== idProducto);
+    this.calcularTotal();
+  }
+    
+
+  /*
+  calcularTotal(): void{
+    this.precioTotal = this.carrito.reduce((total, producto) => total + producto.precio * producto.cantidad, 0);
+  }
+  */
+
+  actualizarCantidad(producto: any, event: any): void {
+    const nuevaCantidad = parseInt(event.target.value, 10) || 1;
+    
+    // Actualizar cantidad en el objeto producto
+    producto.cantidad = nuevaCantidad;
+    
+    // Actualizar en localStorage
+    this.actualizarCantidadEnLocalStorage(producto.id, nuevaCantidad);
+    
+    // Recalcular el total
+    this.calcularTotal();
+  }
+
+  private actualizarCantidadEnLocalStorage(idProducto: number, cantidad: number): void {
+    const tokenString = localStorage.getItem("token");
+    if (!tokenString) return;
+    
+    const payload = JSON.parse(atob(tokenString.split(".")[1]));
+    if (!payload) return;
+    
+    const listaUsuariosString = localStorage.getItem("listaUsuarios");
+    if (!listaUsuariosString) return;
+    
+    const listaUsuarios: Usuario[] = JSON.parse(listaUsuariosString);
+    const usuarioIndex = listaUsuarios.findIndex(u => u.id == payload.id);
+    
+    if (usuarioIndex !== -1) {
+      const productoIndex = listaUsuarios[usuarioIndex].carrito
+        .findIndex((item: any) => item.idProducto === idProducto);
+      
+      if (productoIndex !== -1) {
+        listaUsuarios[usuarioIndex].carrito[productoIndex].cantidad = cantidad;
+        localStorage.setItem("listaUsuarios", JSON.stringify(listaUsuarios));
+      }
+    }
+  }
+
+  calcularTotal(): void {
+    this.precioTotal = this.carrito.reduce((total, producto) => {
+      const precio = Number(producto.precio) || 0;
+      const cantidad = Number(producto.cantidad) || 1;
+      return total + (precio * cantidad);
+    }, 0);
   }
 }

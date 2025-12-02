@@ -181,29 +181,45 @@ export class Productos {
   }
 
   anadirCarrito(producto: Producto): void {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      this.router.navigate(['/login']);
-      return;
-    }
+  // 1. Obtener el token del usuario logueado
+  const token = localStorage.getItem("token");
+  if (!token) {
+    this.router.navigate(['/login']);
+    return;
+  }
 
-    const payload = JSON.parse(atob(token.split(".")[1]));
-    const listaUsuarios: Usuario[] = JSON.parse(localStorage.getItem("listaUsuarios") || '[]');
-    const usuario = listaUsuarios.find(u => u.id == payload.id);
+  // 2. Extraer el id del usuario desde el token
+  const payload = JSON.parse(atob(token.split(".")[1]));
 
-    if (!usuario) {
-      this.mostrarMensaje('Usuario no encontrado.');
-      return;
-    }
+  // 3. Cargar la lista de usuarios
+  const listaUsuarios: Usuario[] = JSON.parse(localStorage.getItem("listaUsuarios") || '[]');
 
-    if (usuario.carrito[producto.id]) {
-      this.mostrarMensaje("El producto ya está en el carrito.");
-      return
-    }
+  // 4. Buscar el usuario actual
+  const usuarioIndex = listaUsuarios.findIndex(u => u.id == payload.id);
+  if (usuarioIndex === -1) {
+    this.mostrarMensaje('Usuario no encontrado.');
+    return;
+  }
 
-    usuario.carrito[producto.id] // Añadir con cantidad 1
-    localStorage.setItem("listaUsuarios", JSON.stringify(listaUsuarios));
-    this.mostrarMensaje('Producto añadido al carrito.');
+  // 5. Verificar si ya está en carrito (buscar por ID)
+  const productoEnCarrito = listaUsuarios[usuarioIndex].carrito
+    .find((item: any) => item.idProducto === producto.id);
 
+  if (productoEnCarrito) {
+    // Si ya existe, aumentar la cantidad
+    productoEnCarrito.cantidad += 1;
+    this.mostrarMensaje('Cantidad aumentada en el carrito.');
+  } else {
+    // Si no existe, añadirlo con cantidad 1
+    const nuevoProductoCarrito = {
+      idProducto: producto.id,
+      cantidad: 1
+    };
+    listaUsuarios[usuarioIndex].carrito.push(nuevoProductoCarrito);
+    this.mostrarMensaje('Añadido al carrito.');
+  }
+
+  // 6. Guardar cambios
+  localStorage.setItem("listaUsuarios", JSON.stringify(listaUsuarios));
   }
 }
