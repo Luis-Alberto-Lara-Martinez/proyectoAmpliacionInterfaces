@@ -16,31 +16,23 @@ export class Menu {
   ngOnInit() {
     if (typeof window === 'undefined') return;
     let token = localStorage.getItem("token");
-    if (!token) return;
+    if (!token) {
+      this.router.navigate(['/login']);
+      return;
+    }
     let payload = JSON.parse(atob(token.split(".")[1]));
     if (!payload || Math.floor(Date.now() / 1000) > payload.exp) {
       localStorage.removeItem("token");
+      this.router.navigate(['/login']);
       return;
     }
-
     this.esAdministrador = payload.rol === "administrador";
     this.userName = payload.userName;
-  }
-
-  buscador(term: string) {
-    if (!term.trim()) {
-      this.router.navigate(['/productos']);
-    } else {
-      this.router.navigate(['/productos'], {
-        queryParams: { terminoABuscar: term }
-      });
-    }
   }
 
   cerrarSesion() {
     let token = localStorage.getItem("token");
     if (token) localStorage.removeItem("token");
-
     if (this.router.url === '/home') {
       location.reload()
     } else {
