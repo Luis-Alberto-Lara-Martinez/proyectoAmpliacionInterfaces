@@ -21,7 +21,7 @@ export class Menu {
       return;
     }
     let payload = JSON.parse(atob(token.split(".")[1]));
-    if (!payload || Math.floor(Date.now() / 1000) > payload.exp) {
+    if (!payload || !payload.exp || Math.floor(Date.now() / 1000) >= payload.exp) {
       localStorage.removeItem("token");
       this.router.navigate(['/login']);
       return;
