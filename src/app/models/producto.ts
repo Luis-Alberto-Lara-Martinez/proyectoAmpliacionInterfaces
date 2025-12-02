@@ -4,6 +4,7 @@ export interface Producto {
     marca: string;
     categoria: string;
     precio: number;
+    stock: number;
     listaImagenes: string[];
     descripcion: string;
     valoraciones: Valoracion[];

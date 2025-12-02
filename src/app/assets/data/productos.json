@@ -5,6 +5,7 @@
         "marca": "Asus",
         "categoria": "Portátiles",
         "precio": 1099.99,
+        "stock": 15,
         "listaImagenes": [
             "assets/images/products/portatil-asus-1.webp",
             "assets/images/products/portatil-asus-2.webp",
@@ -32,6 +33,7 @@
         "marca": "LG",
         "categoria": "Monitores",
         "precio": 299.99,
+        "stock": 8,
         "listaImagenes": [
             "assets/images/monitor-lg-1.jpg",
             "assets/images/monitor-lg-2.jpg"
@@ -52,6 +54,7 @@
         "marca": "Logitech",
         "categoria": "Periféricos",
         "precio": 129.99,
+        "stock": 25,
         "listaImagenes": [
             "assets/images/teclado-logitech-1.jpg",
             "assets/images/teclado-logitech-2.jpg"
@@ -77,6 +80,7 @@
         "marca": "Razer",
         "categoria": "Periféricos",
         "precio": 69.99,
+        "stock": 30,
         "listaImagenes": [
             "assets/images/raton-razer-1.jpg",
             "assets/images/raton-razer-2.jpg"
@@ -97,6 +101,7 @@
         "marca": "MSI",
         "categoria": "Componentes",
         "precio": 649.99,
+        "stock": 5,
         "listaImagenes": [
             "assets/images/rtx4070-msi-1.jpg",
             "assets/images/rtx4070-msi-2.jpg"
@@ -117,6 +122,7 @@
         "marca": "AMD",
         "categoria": "Componentes",
         "precio": 449.99,
+        "stock": 12,
         "listaImagenes": [
             "assets/images/ryzen7-amd-1.jpg",
             "assets/images/ryzen7-amd-2.jpg"
@@ -131,6 +137,7 @@
         "marca": "Corsair",
         "categoria": "Componentes",
         "precio": 139.99,
+        "stock": 20,
         "listaImagenes": [
             "assets/images/ram-corsair-1.jpg",
             "assets/images/ram-corsair-2.jpg"
@@ -151,6 +158,7 @@
         "marca": "Samsung",
         "categoria": "Almacenamiento",
         "precio": 179.99,
+        "stock": 18,
         "listaImagenes": [
             "assets/images/ssd-samsung-1.jpg",
             "assets/images/ssd-samsung-2.jpg"
@@ -171,6 +179,7 @@
         "marca": "HyperX",
         "categoria": "Periféricos",
         "precio": 149.99,
+        "stock": 22,
         "listaImagenes": [
             "assets/images/auriculares-hyperx-1.jpg",
             "assets/images/auriculares-hyperx-2.jpg"
@@ -185,6 +194,7 @@
         "marca": "Logitech",
         "categoria": "Periféricos",
         "precio": 129.99,
+        "stock": 14,
         "listaImagenes": [
             "assets/images/webcam-logitech-1.jpg",
             "assets/images/webcam-logitech-2.jpg"
@@ -205,6 +215,7 @@
         "marca": "Dell",
         "categoria": "Portátiles",
         "precio": 999.99,
+        "stock": 10,
         "listaImagenes": [
             "assets/images/portatil-dell-1.jpg"
         ],
@@ -218,6 +229,7 @@
         "marca": "Samsung",
         "categoria": "Monitores",
         "precio": 399.99,
+        "stock": 6,
         "listaImagenes": [
             "assets/images/monitor-samsung-1.jpg"
         ],
@@ -231,6 +243,7 @@
         "marca": "Razer",
         "categoria": "Periféricos",
         "precio": 149.99,
+        "stock": 16,
         "listaImagenes": [
             "assets/images/teclado-razer-1.jpg"
         ],
@@ -244,6 +257,7 @@
         "marca": "Logitech",
         "categoria": "Periféricos",
         "precio": 59.99,
+        "stock": 28,
         "listaImagenes": [
             "assets/images/raton-logitech-1.jpg"
         ],
@@ -257,6 +271,7 @@
         "marca": "MSI",
         "categoria": "Componentes",
         "precio": 899.99,
+        "stock": 3,
         "listaImagenes": [
             "assets/images/rtx4080-msi-1.jpg"
         ],
@@ -270,6 +285,7 @@
         "marca": "Intel",
         "categoria": "Componentes",
         "precio": 599.99,
+        "stock": 7,
         "listaImagenes": [
             "assets/images/i9-intel-1.jpg"
         ],
@@ -283,6 +299,7 @@
         "marca": "Kingston",
         "categoria": "Componentes",
         "precio": 79.99,
+        "stock": 35,
         "listaImagenes": [
             "assets/images/ram-kingston-1.jpg"
         ],
@@ -296,6 +313,7 @@
         "marca": "Crucial",
         "categoria": "Almacenamiento",
         "precio": 119.99,
+        "stock": 24,
         "listaImagenes": [
             "assets/images/ssd-crucial-1.jpg"
         ],
@@ -309,6 +327,7 @@
         "marca": "Logitech",
         "categoria": "Periféricos",
         "precio": 129.99,
+        "stock": 19,
         "listaImagenes": [
             "assets/images/auriculares-logitech-1.jpg"
         ],
@@ -322,6 +341,7 @@
         "marca": "Razer",
         "categoria": "Periféricos",
         "precio": 109.99,
+        "stock": 11,
         "listaImagenes": [
             "assets/images/webcam-razer-1.jpg"
         ],
@@ -335,6 +355,7 @@
         "marca": "HP",
         "categoria": "Portátiles",
         "precio": 899.99,
+        "stock": 13,
         "listaImagenes": [
             "assets/images/portatil-hp-1.jpg"
         ],
@@ -348,6 +369,7 @@
         "marca": "Acer",
         "categoria": "Monitores",
         "precio": 329.99,
+        "stock": 9,
         "listaImagenes": [
             "assets/images/monitor-acer-1.jpg"
         ],
@@ -361,6 +383,7 @@
         "marca": "Corsair",
         "categoria": "Periféricos",
         "precio": 139.99,
+        "stock": 17,
         "listaImagenes": [
             "assets/images/teclado-corsair-1.jpg"
         ],
@@ -374,6 +397,7 @@
         "marca": "SteelSeries",
         "categoria": "Periféricos",
         "precio": 49.99,
+        "stock": 32,
         "listaImagenes": [
             "assets/images/raton-steelseries-1.jpg"
         ],
@@ -387,6 +411,7 @@
         "marca": "Gigabyte",
         "categoria": "Componentes",
         "precio": 529.99,
+        "stock": 4,
         "listaImagenes": [
             "assets/images/rtx4060-gigabyte-1.jpg"
         ],
