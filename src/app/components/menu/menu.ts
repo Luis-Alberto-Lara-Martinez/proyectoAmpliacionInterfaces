@@ -33,10 +33,6 @@ export class Menu {
   cerrarSesion() {
     let token = localStorage.getItem("token");
     if (token) localStorage.removeItem("token");
-    if (this.router.url === '/home') {
-      location.reload()
-    } else {
-      this.router.navigate(['/home']);
-    }
+    this.router.navigate(['/login']);
   }
 }
