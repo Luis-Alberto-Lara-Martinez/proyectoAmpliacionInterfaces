@@ -29,7 +29,11 @@ export class Restablecimiento {
     }
     let payload;
     try {
-      payload = JSON.parse(atob(token.split(".")[1]));
+      let base64 = token.split(".")[1].replace(/-/g, '+').replace(/_/g, '/');
+      while (base64.length % 4) {
+        base64 += '=';
+      }
+      payload = JSON.parse(atob(base64));
       if (!payload || !payload.exp) {
         this.router.navigate(['/login']);
         return;

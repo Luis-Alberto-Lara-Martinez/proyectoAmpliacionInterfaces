@@ -22,7 +22,7 @@ export class UsuariosService {
     );
   }
 
-  private base64UrlEncode(str: string): string {
+  base64UrlEncode(str: string): string {
     return btoa(str)
       .replace(/\+/g, '-')
       .replace(/\//g, '_')
