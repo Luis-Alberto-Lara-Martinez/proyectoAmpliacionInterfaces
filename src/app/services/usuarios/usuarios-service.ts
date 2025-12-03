@@ -22,19 +22,25 @@ export class UsuariosService {
     );
   }
 
+  private base64UrlEncode(str: string): string {
+    return btoa(str)
+      .replace(/\+/g, '-')
+      .replace(/\//g, '_')
+      .replace(/=/g, '');
+  }
+
   crearTokenRestablecerClave(email: string): string {
-    let header = btoa(JSON.stringify({
+    let header = this.base64UrlEncode(JSON.stringify({
       alg: "HS256",
       typ: "JWT"
     }));
 
-    let payload = btoa(JSON.stringify({
+    let payload = this.base64UrlEncode(JSON.stringify({
       email: email,
       exp: Math.floor(Date.now() / 1000) + (5 * 3600)
     }));
 
-    let firma = btoa(this.claveSecreta);
-
+    let firma = this.base64UrlEncode(this.claveSecreta);
     return `${header}.${payload}.${firma}`;
   }
 
