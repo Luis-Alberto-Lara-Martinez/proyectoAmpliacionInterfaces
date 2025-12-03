@@ -29,8 +29,11 @@ export class Restablecimiento {
     }
     let payload;
     try {
-      let base64 = token.split(".")[1].replace(/-/g, '+').replace(/_/g, '/');
-      while (base64.length % 4) {
+      let payloadPart = token.split(".")[1];
+      // Manejar tanto Base64URL (sin padding) como Base64 estándar (con padding)
+      let base64 = payloadPart.replace(/-/g, '+').replace(/_/g, '/');
+      // Solo agregar padding si no tiene
+      while (base64.length % 4 !== 0) {
         base64 += '=';
       }
       payload = JSON.parse(atob(base64));
