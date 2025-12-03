@@ -23,11 +23,6 @@ export class Restablecimiento {
 
   ngOnInit() {
     let token = this.route.snapshot.queryParams['tokenR'];
-    console.log('Token recibido:', token);
-    if (!token) {
-      this.router.navigate(['/login']);
-      return;
-    }
 
     let payloadPart = token.split(".")[1];
     let base64 = payloadPart.replace(/-/g, '+').replace(/_/g, '/');
