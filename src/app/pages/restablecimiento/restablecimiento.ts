@@ -28,18 +28,14 @@ export class Restablecimiento {
       this.router.navigate(['/login']);
       return;
     }
-    let payload;
-    try {
-      let payloadPart = token.split(".")[1];
-      let base64 = payloadPart.replace(/-/g, '+').replace(/_/g, '/');
-      while (base64.length % 4 !== 0) {
-        base64 += '=';
-      }
-      payload = JSON.parse(atob(base64));
-    } catch (e) {
-      this.router.navigate(['/login']);
-      return;
+
+    let payloadPart = token.split(".")[1];
+    let base64 = payloadPart.replace(/-/g, '+').replace(/_/g, '/');
+    while (base64.length % 4 !== 0) {
+      base64 += '=';
     }
+    let payload = JSON.parse(atob(base64));
+
     this.email = payload.email;
   }
 
